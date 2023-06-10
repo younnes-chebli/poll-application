@@ -1,0 +1,58 @@
+﻿<f:UserControlBase x:Class="MyPoll.View.VotesParticipantView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+             xmlns:fap="http://schemas.fontawesome.com/icons/fonts/properties"
+             xmlns:vw="clr-namespace:MyPoll.View"
+             xmlns:vm="clr-namespace:MyPoll.ViewModel"
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=vm:VotesParticipantViewModel, IsDesignTimeCreatable=False}">
+
+    <StackPanel Orientation="Horizontal">
+        <Border BorderBrush="Black" BorderThickness="1,0,0,1" SnapsToDevicePixels="True"
+                Width="100">
+            <TextBlock Text="{Binding Participant.FullName}" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Border>
+        <ItemsControl ItemsSource="{Binding VotesVM}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <vw:VoteView />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Border BorderBrush="Black" BorderThickness="1, 0, 1, 1" Width="60">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Margin="0">
+                <Button fap:FontAwesome.Icon="Solid_Pencil" Foreground="Black" Width="20"
+                        FontSize="15" Margin="0"
+                        Padding="2" Background="Transparent" BorderBrush="Transparent"
+                        Visibility="{c:Binding Editable}"
+                        Command="{Binding EditCommand}" />
+                <Button fap:FontAwesome.Icon="Regular_TrashCan" Foreground="red" Width="20"
+                        FontSize="15" Margin="0"
+                        Padding="2" Background="Transparent" BorderBrush="Transparent"
+                        Visibility="{c:Binding Editable}"
+                        Command="{Binding DeleteCommand}" />
+                <Button fap:FontAwesome.Icon="Solid_FloppyDisk" Foreground="Green" Width="20"
+                        FontSize="15" Margin="0"
+                        Padding="2" Background="Transparent" BorderBrush="Transparent"
+                        Visibility="{c:Binding EditMode}"
+                        Command="{Binding SaveCommand}" />
+                <Button fap:FontAwesome.Icon="Solid_X" Foreground="red" Width="20" FontSize="15"
+                        Margin="0"
+                        Padding="2" Background="Transparent" BorderBrush="Transparent"
+                        Visibility="{c:Binding EditMode}"
+                        Command="{Binding CancelCommand}" />
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</f:UserControlBase>

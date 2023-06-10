@@ -1,0 +1,16 @@
+﻿<!-- prbd-2223-g09 -->
+<f:ApplicationBase x:Class="MyPoll.App"
+             x:TypeArguments="m:User,m:MyPollContext"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="clr-namespace:MyPoll.Model"
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             StartupUri="View/LoginView.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/PRBD_Framework;component/Styles/PRBD_Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</f:ApplicationBase>

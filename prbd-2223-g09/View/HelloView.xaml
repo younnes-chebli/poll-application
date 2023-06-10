@@ -1,0 +1,26 @@
+﻿<f:UserControlBase x:Class="MyPoll.View.HelloView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyPoll.View"
+             xmlns:vm="clr-namespace:MyPoll.ViewModel"
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             d:DataContext="{d:DesignInstance Type=vm:HelloViewModel, IsDesignTimeCreatable=True}"
+             mc:Ignorable="d" 
+             Height="600" Width="800">
+    
+    <UserControl.DataContext>
+        <vm:HelloViewModel x:Name="vm"/>
+    </UserControl.DataContext>
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Text="{Binding Title}"
+               VerticalAlignment="Center" HorizontalAlignment="Center"
+               FontSize="40" FontFamily="Comic Sans MS"/>
+        <TextBlock Text="{Binding Credits}"
+               VerticalAlignment="Center" HorizontalAlignment="Center"
+               FontSize="12" FontFamily="Comic Sans MS"/>
+    </StackPanel>
+
+</f:UserControlBase>

@@ -1,0 +1,120 @@
+﻿<f:UserControlBase x:Class="MyPoll.View.EditPollView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fap="http://schemas.fontawesome.com/icons/fonts/properties"
+             xmlns:vw="clr-namespace:MyPoll.View"
+             xmlns:vm="clr-namespace:MyPoll.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:f="clr-namespace:PRBD_Framework;assembly=PRBD_Framework"
+             d:DataContext="{d:DesignInstance Type=vm:EditPollViewModel, IsDesignTimeCreatable=False}">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding PollTitle}" Margin="30" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"></TextBlock>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Poll Name: " Grid.Row="0" Grid.Column="0"/>
+                <TextBox x:Name="pollName" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Type: " Grid.Row="1" Grid.Column="0"/>
+                <ComboBox x:Name="type" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding Types}" SelectedItem="{Binding Type}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Creator: " Grid.Row="2" Grid.Column="0"/>
+                <TextBlock x:Name="creator" Grid.Row="2" Text="{Binding Creator.FullName}" Grid.Column="1" VerticalAlignment="Center"></TextBlock>
+                <Label Content="Closed: " Grid.Row="3" Grid.Column="0"/>
+                <CheckBox x:Name="closed" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Closed, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition  Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="15" VerticalAlignment="Center" >
+                    <Run Text="Participants" FontSize="16" FontWeight="Bold"/>
+                    </TextBlock>
+                    <Border MinHeight="100" Margin="15" Grid.Row="1" BorderThickness="1" BorderBrush="Black">
+                        <StackPanel Background="White">
+                            <ItemsControl ItemsSource="{Binding ParticipantsVM}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <vw:ParticipantView/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <ComboBox x:Name="combo" Width="200" VerticalAlignment="Center" ItemsSource="{Binding ParticipantsToAdd}" SelectedItem="{Binding SelectedParticipant, Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FullName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button x:Name="btnAddParticipant" Content="Add Participant" Command="{Binding AddParticipant}" CommandParameter="{Binding ElementName=combo, Path=SelectedItem}" Margin="10" Padding="5"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <Button x:Name="btnAddMyself" Content="Add Myself" Command="{Binding AddMyself}" Margin="10" Padding="5"/>
+                        <Button x:Name="btnAddEverybody" Content="Add Everybody" Command="{Binding AddEverybody}" Margin="10" Padding="5"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Choices" FontSize="16" FontWeight="Bold" Margin="15" VerticalAlignment="Center" ></TextBlock>
+                    <Border MinHeight="100" Margin="15" Grid.Row="1" BorderThickness="1" BorderBrush="Black">
+                        <StackPanel Background="White">
+                            <ItemsControl ItemsSource="{Binding ChoicesVM}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <vw:ChoiceView/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBox Width="200" VerticalAlignment="Center" Text="{Binding ChoiceInput, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button x:Name="btnAddChoice" Content="Add Choice" Command="{Binding AddChoice}" Margin="10" Grid.Row="3" Padding="5"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnSavePoll" Content="Save Poll" Command="{Binding SavePoll}" Margin="10" Padding="5"/>
+                <Button x:Name="btnCancel" Content="Cancel" Command="{Binding Cancel}" Margin="10" Padding="5"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</f:UserControlBase>

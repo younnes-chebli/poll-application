@@ -11,6 +11,8 @@ C# .NET Desktop Application for creating polls and voting on choices
 * MVVM
 * Bindings
 
+## The App
+
 ![image](https://github.com/younnes-chebli/desktop-poll-application/assets/106768273/a16b6eb6-7da4-46cf-a5a8-3d5cebb15e82)
 
 ![image](https://github.com/younnes-chebli/desktop-poll-application/assets/106768273/100c237e-8ad5-446a-8aa4-2b1514f5a285)

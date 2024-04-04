@@ -1,5 +1,7 @@
 # Desktop Poll Application
+
 School Project
+
 C# .NET Desktop Application for creating polls and voting on choices
 
 ## Technologies used

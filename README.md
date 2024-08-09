@@ -1,7 +1,5 @@
 # Desktop Poll Application
 
-School Project
-
 C# .NET Desktop Application (WPF) for creating polls and voting on choices
 
 ## Technologies used

@@ -4,7 +4,7 @@ C# .NET Desktop Application (WPF) for creating polls and voting on choices
 
 ## Technologies used
 * C# .NET
-* Entitiy Framework
+* Entitiy Framework Core
 * WPF
 
 ## Architecture
